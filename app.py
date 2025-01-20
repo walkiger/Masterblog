@@ -48,5 +48,19 @@ def add():
 
     return render_template('add.html')
 
+@app.route('/delete/<int:post_id>')
+def delete(post_id):
+    # Load existing posts
+    blog_posts = load_posts()
+
+    # Find the blog post with the given ID and remove it from the list
+    blog_posts = [post for post in blog_posts if post['id'] != post_id]
+
+    # Save updated posts to JSON file
+    save_posts(blog_posts)
+
+    # Redirect to the home page
+    return redirect(url_for('index'))
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5002, debug=True)
