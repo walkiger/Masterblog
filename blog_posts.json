@@ -2,13 +2,8 @@
     {
         "id": 1,
         "author": "Michel Gaede",
-        "title": "1st entry",
-        "content": "testing..."
-    },
-    {
-        "id": 2,
-        "author": "Michel Gaede",
-        "title": "2nd entry",
-        "content": "works fine...\r\nediting works also!"
+        "title": "added likes",
+        "content": "let's try to to like a posting, multiple times!",
+        "likes": 14
     }
 ]

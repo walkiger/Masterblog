@@ -34,7 +34,8 @@ def add():
             'id': blog_posts[-1]['id'] + 1 if blog_posts else 1,
             'author': author,
             'title': title,
-            'content': content
+            'content': content,
+            'likes': 0  # Initialize likes to 0
         }
 
         # Add new post to the list
@@ -80,6 +81,25 @@ def delete(post_id):
 
     # Find the blog post with the given ID and remove it from the list
     blog_posts = [post for post in blog_posts if post['id'] != post_id]
+
+    # Save updated posts to JSON file
+    save_posts(blog_posts)
+
+    # Redirect to the home page
+    return redirect(url_for('index'))
+
+@app.route('/like/<int:post_id>')
+def like(post_id):
+    # Load existing posts
+    blog_posts = load_posts()
+
+    # Find the blog post with the given ID
+    post = next((post for post in blog_posts if post['id'] == post_id), None)
+    if post is None:
+        return "Post not found", 404
+
+    # Increment the like count
+    post['likes'] += 1
 
     # Save updated posts to JSON file
     save_posts(blog_posts)
